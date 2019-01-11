@@ -1,0 +1,18 @@
+@import "./variable"
+
+body, html
+  line-height: 1
+  font-weight: 200
+  font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif
+  background: $color-background
+
+.clearfix
+  display: inline-block
+  &:after
+    display: block
+    content: "."
+    height: 0
+    line-height: 0
+    clear: both
+    visibility: hidden
+

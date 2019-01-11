@@ -1,25 +1,61 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+
+const Access = () => import('components/access/access')
+const Retrieval = () => import('components/retrieval/retrieval')
+const Analysis = () => import('components/analysis/analysis')
+const Relation = () => import('components/relation/relation')
+const System = () => import('components/system/system')
+const User = () => import('components/user/user')
+
+const SystemRole = () => import('components/system/role/role')
+const SystemInterface = () => import('components/system/interface/interface')
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
-  ]
+    // mode: 'history',
+    base: process.env.BASE_URL,
+    linkActiveClass: 'active',
+    routes: [
+        {
+            path: '/',
+            redirect: '/retrieval'
+        },
+        {
+            path: '/access',
+            component: Access,
+            name: 'access'
+        },
+        {
+            path: '/retrieval',
+            component: Retrieval
+        },
+        {
+            path: '/analysis',
+            component: Analysis
+        },
+        {
+            path: '/relation',
+            component: Relation
+        },
+        {
+            path: '/system',
+            component: System,
+            children: [
+                {
+                    path: '/system-role',
+                    component: SystemRole,
+                },
+                {
+                    path: '/system-interface',
+                    component: SystemInterface, 
+                }
+            ]
+        },
+        {
+            path: '/user',
+            component: User
+        }
+    ]
 })
