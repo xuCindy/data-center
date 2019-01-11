@@ -1,11 +1,11 @@
 <template>
-    <div class="relation">
-        关联管理
-    </div>
+  <div class="relation">
+    关联管理
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
-    export default {}
+  export default {}
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
