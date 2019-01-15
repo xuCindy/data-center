@@ -1,6 +1,6 @@
 <template>
-  <div class="user">
-
+  <div class="role">
+    <Page :total="40" size="small" show-elevator show-sizer />
   </div>
 </template>
 

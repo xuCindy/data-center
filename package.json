@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "iview": "^3.2.1",
+    "v-distpicker": "^1.1.0",
     "vue": "^2.5.21",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -22,11 +23,10 @@
     "body-parser": "^1.18.3",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
-    "express": "^4.16.4",
     "querystring": "^0.2.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.5.21",
-    "whatwg-fetch": "^3.0.0"
+    "whatwg-fetch": "^3.0.0e"
   }
 }

@@ -1,74 +1,62 @@
 <template>
   <div class="system">
-     <div class="system-left">
-       <sidebar :list="list"></sidebar>
-    </div>
-    <div class="system-right">
-      <router-view/>
-    </div>
+    <container>
+      <sidebar :list="list"></sidebar>
+    </container>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import Sidebar from 'components/sidebar/sidebar'
+  import Container from 'base/container/container'
 
   export default {
     data() {
       return {
+        isShow: true,
         list: [
           {
             text: '角色管理',
-            path: '/system-role',
+            path: '/s-role',
           },
           {
             text: '接口管理',
-            path: '/system-interface',
+            path: '/s-interface',
           },
           {
             text: '功能管理',
-            path: '/system-role',
+            path: '/s-func',
           },
           {
             text: '数据接入管理',
-            path: '/system-role',
+            path: '/s-access',
           },
           {
             text: '代码表管理',
-            path: '/system-role',
+            path: '/s-code',
           },
           {
             text: '共享请求系统管理',
-            path: '/system-role',
+            path: '/s-request',
           },
           {
             text: '共享接口信息管理',
-            path: '/system-role',
+            path: '/s-info',
           },
           {
             text: '共享数据管理',
-            path: '/system-role',
+            path: '/s-data',
           }
         ]
       }
     },
     components: {
-      Sidebar
+      Sidebar,
+      Container
     }
   }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  @import '~common/stylus/variable.styl'
-  .system
-    display: flex
-    .system-left
-      width: 268px
-      height 100%
-      padding-top: 30px
-      overflow: hidden
-      text-align: left
-      background: $color-background-leftSide
-      border-right: 1px solid $color-border-leftSide
-    .system-right
-      flex: 1
+
 </style>

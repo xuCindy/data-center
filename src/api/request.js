@@ -15,15 +15,15 @@ export function getData(_module, _service, _data = {}) {
       },
       body: querystring.stringify(postData)
     }).then(_res => {
-      return _res.json();
+      return _res.json()
     }).then(_data => {
       switch (_data.status) {
         case 200:
           resolve(_data.body)
-          break;
+          break
         case 419:
           reject(_data.message)
-          break;
+          break
         default:
           reject(_data.message)
       }

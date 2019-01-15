@@ -1,21 +1,24 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createLogger from 'vuex/dist/logger'
 
 Vue.use(Vuex)
 
-// const user = state => state.user
+const debug = process.env.NODE_ENV !== 'production'
+
+export const user = state => state.user
 const SET_USER = 'SET_USER'
 
 export default new Vuex.Store({
   state: {
-    singer: {},
+    user: {},
   },
   mutations: {
     [SET_USER](state, user) {
       state.user = user
     },
   },
-  actions: {
-
-  }
+  actions: {},
+  strict: debug,
+  plugins: debug ? [createLogger()] : []
 })

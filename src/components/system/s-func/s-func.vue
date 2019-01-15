@@ -1,7 +1,5 @@
 <template>
-  <div class="role">
-    yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
-  </div>
+  <div>功能管理</div>
 </template>
 
 <script type="text/ecmascript-6">

@@ -5,27 +5,27 @@
       <h1 class="logo-text">全国固定污染源数据中心</h1>
     </div>
     <div class="tab">
-      <router-link tag="div" class="tab-item" to="/access">
+      <router-link tag="div" class="tab-item" to="/access" :class="{active: this.$route.meta.topMenu === 'access'}">
         <img src="./img/monitor.png" class="tab-img"/>
         <span class="tab-link">数据接入</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/retrieval">
+      <router-link tag="div" class="tab-item" to="/retrieval" :class="{active: this.$route.meta.topMenu === 'retrieval'}">
         <img src="./img/search.png" class="tab-img"/>
         <span class="tab-link">数据检索</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/analysis">
+      <router-link tag="div" class="tab-item" to="/analysis" :class="{active: this.$route.meta.topMenu === 'analysis'}">
         <img src="./img/census.png" class="tab-img"/>
         <span class="tab-link">统计分析</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/relation">
+      <router-link tag="div" class="tab-item" to="/relation" :class="{active: this.$route.meta.topMenu === 'relation'}">
         <img src="./img/connect.png" class="tab-img"/>
         <span class="tab-link">关联管理</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/user">
+      <router-link tag="div" class="tab-item" to="/user" :class="{active: this.$route.meta.topMenu === 'user'}">
         <img src="./img/user.png" class="tab-img"/>
         <span class="tab-link">用户管理</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/system-role">
+      <router-link tag="div" class="tab-item" to="/s-role" :class="{active: this.$route.meta.topMenu === 'system'}">
         <img src="./img/system.png" class="tab-img"/>
         <span class="tab-link">系统设置</span>
       </router-link>

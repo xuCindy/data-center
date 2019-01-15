@@ -23,6 +23,7 @@ module.exports = {
       .set('components', resolve('src/components'))
       .set('common', resolve('src/common'))
       .set('api', resolve('src/api'))
+      .set('base', resolve('src/base'))
 
     config.plugin('context')
       .use(webpack.ContextReplacementPlugin,
