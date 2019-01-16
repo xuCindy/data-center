@@ -7,7 +7,11 @@ import 'iview/dist/styles/iview.css'
 
 import 'common/stylus/index.styl'
 
+import Filter from './filter'
+
 Vue.use(iView)
+
+Filter(Vue)
 
 Vue.config.productionTip = false
 

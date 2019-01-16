@@ -6,19 +6,25 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 
-export const user = state => state.user
-const SET_USER = 'SET_USER'
+// export const userInfo = state => state.userInfo
+
+const SET_USERINFO = 'SET_USERINFO'
 
 export default new Vuex.Store({
   state: {
-    user: {},
+    userInfo: {},
   },
   mutations: {
-    [SET_USER](state, user) {
-      state.user = user
+    [SET_USERINFO](state, userInfo) {
+      state.userInfo = userInfo
     },
   },
-  actions: {},
+  getters: {
+    userInfo: state => state.userInfo
+  },
+  actions: {
+
+  },
   strict: debug,
   plugins: debug ? [createLogger()] : []
 })

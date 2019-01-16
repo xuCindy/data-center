@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <div class="container-left" ref="menuWrapper">
+    <div class="container-left" ref="menuWrapper" v-if="isShow">
       <transition name="fade">
-        <div class="wrapper" v-show="isShow">
+        <div class="wrapper">
           <slot></slot>
         </div>
       </transition>
     </div>
-    <div class="show-slider" @click="showToggle">
+    <div class="show-menu" @click="showToggle" ref="showBtn">
       显示
     </div>
     <div class="container-right" ref="contentWrapper">
@@ -28,6 +28,11 @@
     methods: {
       showToggle() {
         this.isShow = !this.isShow
+        if (this.isShow) {
+          this.$refs.showBtn.style.left = '268px'
+        } else {
+          this.$refs.showBtn.style.left = 0
+        }
       }
     }
   }
@@ -42,6 +47,11 @@
     bottom: 0
     width: 100%
     overflow: hidden
+    background: $color-background
+    .show-menu
+      position: absolute
+      bottom: 80px
+      left: 268px
     .container-left
       width: 268px
       height 100%
@@ -57,6 +67,7 @@
         transition: opacity .5s
       .fade-enter, .fade-leave-to
         opacity: 0
-    .system-right
+    .container-right
       flex: 1
+
 </style>

@@ -7,6 +7,7 @@ const Analysis = () => import('components/analysis/analysis')
 const Relation = () => import('components/relation/relation')
 const System = () => import('components/system/system')
 const User = () => import('components/user/user')
+const UserList = () => import('components/user/user-list/user-list')
 const Login = () => import('components/login/login')
 // 系统管理
 const SRole = () => import('components/system/s-role/s-role')
@@ -28,7 +29,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/retrieval'
+      redirect: '/login'
     },
     {
       path: '/access',
@@ -110,8 +111,17 @@ export default new Router({
       ]
     },
     {
-      path: '/user',
-      component: User
+      path: '/user-list',
+      component: User,
+      children: [
+        {
+          path: '/user-list',
+          component: UserList,
+          meta: {
+            topMenu: 'user'
+          }
+        }
+      ]
     },
     {
       path: '/login',

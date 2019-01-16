@@ -115,7 +115,7 @@
     },
     methods: {
       ...mapMutations({
-        setUser: 'SET_USER'
+        setUserInfo: 'SET_USERINFO'
       }),
       handleSubmit() {
         this.$refs['loginForm'].validate(valid => {
@@ -134,7 +134,6 @@
           window.sessionStorage.setItem('sessionId',_res.sessionId)
           this.getLoginData(_res.user)
         }).catch(_err => {
-          console.log(_err)
           this.isSubmitting = false
           this.$Message.error(_err)
         })
@@ -143,16 +142,15 @@
       getLoginData(data) {
         let _result = data
         if (_result.roleCode && _result.roleCode === 'EIA') {
-          // window.localStorage.setItem('token',_result.token)
-          this.setUser(_result)
-          this.isSubmitting = false;
+          this.setUserInfo(_result)
+          this.isSubmitting = false
           this.$router.push('/retrieval')
         } else {
           this.$Modal.warning({
             title: '提示',
             content: '该用户没有权限'
-          });
-          this.isSubmitting = false;
+          })
+          this.isSubmitting = false
         }
       }
     }

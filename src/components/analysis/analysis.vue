@@ -79,7 +79,17 @@
               }
             ]
           }
-        ]
+        ],
+        params: {
+          provinceCode: '',
+          cityCode: '',
+          nationaleconomycodeAndname: '',
+          approvalDateStart: '',
+          approvalDateEnd: '',
+          projectName: '',
+          page: 1,
+          limit: 10
+        }
       }
     },
     created() {
@@ -87,16 +97,7 @@
     },
     methods: {
       _getReportInfo() {
-        getData("rt", "getDirectReportProjectListService", {
-          provinceCode: "",
-          cityCode: "",
-          nationaleconomycodeAndname: "",
-          approvalDateStart: "",
-          approvalDateEnd: "",
-          projectName: "",
-          page: 1,
-          limit: 10
-        }).then(res => {
+        getData("rt", "getDirectReportProjectListService", this.params).then(res => {
           console.log(res)
         })
       }

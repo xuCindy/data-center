@@ -1,32 +1,3 @@
-import {mapGetters, mapMutations} from 'vuex'
-
-export const userMixin = {
-  computed: {
-    ...mapGetters([
-      'user'
-    ])
-  },
-  mounted() {
-    this.handlePlaylist(this.playlist)
-  },
-  activated() {
-    this.handlePlaylist(this.playlist)
-  },
-  watch: {
-    playlist(newVal) {
-      this.handlePlaylist(newVal)
-    }
-  },
-  methods: {
-    handlePlaylist() {
-      throw new Error('component must implement handlePlaylist method')
-    },
-    ...mapMutations({
-      setUser: 'SET_USER'
-    })
-  }
-}
-
 export const ERR_OK = 200
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -40,12 +11,14 @@ const apiConfig = {
 }
 
 let _time = Math.floor(Date.now() / 1000)
-// let _userInfo = JSON.parse(window.sessionStorage.userInfo)
-// let _selfId = window.sessionStorage.selfId || _userInfo.id
+let _userInfo = JSON.parse(sessionStorage.getItem('store')).userInfo
+let _selfId = _userInfo.id
 let _sessionId = window.sessionStorage.sessionId || ''
 
+console.log(_userInfo)
+
 export const commonParams = {
-  selfId: 13,
+  selfId: _selfId,
   sessionId: _sessionId,
   version: apiConfig.version,
   test: 'yes',

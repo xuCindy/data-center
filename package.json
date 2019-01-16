@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "good-storage": "^1.1.0",
     "iview": "^3.2.1",
     "v-distpicker": "^1.1.0",
     "vue": "^2.5.21",

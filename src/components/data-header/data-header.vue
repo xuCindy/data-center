@@ -5,40 +5,91 @@
       <h1 class="logo-text">全国固定污染源数据中心</h1>
     </div>
     <div class="tab">
-      <router-link tag="div" class="tab-item" to="/access" :class="{active: this.$route.meta.topMenu === 'access'}">
+      <router-link
+        tag="div"
+        v-if="userInfo.roleId !== 3"
+        class="tab-item"
+        to="/access"
+        :class="{active: this.$route.meta.topMenu === 'access'}"
+      >
         <img src="./img/monitor.png" class="tab-img"/>
         <span class="tab-link">数据接入</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/retrieval" :class="{active: this.$route.meta.topMenu === 'retrieval'}">
+      <router-link
+        tag="div"
+        class="tab-item"
+        to="/retrieval"
+        :class="{active: this.$route.meta.topMenu === 'retrieval'}"
+      >
         <img src="./img/search.png" class="tab-img"/>
         <span class="tab-link">数据检索</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/analysis" :class="{active: this.$route.meta.topMenu === 'analysis'}">
+      <router-link
+        tag="div"
+        class="tab-item"
+        to="/analysis"
+        :class="{active: this.$route.meta.topMenu === 'analysis'}"
+      >
         <img src="./img/census.png" class="tab-img"/>
         <span class="tab-link">统计分析</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/relation" :class="{active: this.$route.meta.topMenu === 'relation'}">
+      <router-link
+        tag="div"
+        v-if="userInfo.roleId !== 3"
+        class="tab-item"
+        to="/relation"
+        :class="{active: this.$route.meta.topMenu === 'relation'}"
+      >
         <img src="./img/connect.png" class="tab-img"/>
         <span class="tab-link">关联管理</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/user" :class="{active: this.$route.meta.topMenu === 'user'}">
+      <router-link
+        tag="div"
+        v-if="userInfo.roleId !== 3"
+        class="tab-item" to="/user-list"
+        :class="{active: this.$route.meta.topMenu === 'user'}"
+      >
         <img src="./img/user.png" class="tab-img"/>
         <span class="tab-link">用户管理</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/s-role" :class="{active: this.$route.meta.topMenu === 'system'}">
+      <router-link
+        tag="div"
+        v-if="userInfo.roleId !== 3"
+        class="tab-item" to="/s-role"
+        :class="{active: this.$route.meta.topMenu === 'system'}"
+      >
         <img src="./img/system.png" class="tab-img"/>
         <span class="tab-link">系统设置</span>
       </router-link>
     </div>
-    <router-link tag="div" class="mine" to="/">
-      注销
-      <i class="icon-mine"></i>
-    </router-link>
+    <div class="exit" @click="exitLogin">注销</div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  export default {}
+  import {mapGetters,mapMutations} from 'vuex'
+
+  export default {
+    data() {
+      return {
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'userInfo'
+      ])
+    },
+
+    methods: {
+      ...mapMutations({
+        setUserInfo: 'SET_USERINFO'
+      }),
+      exitLogin() {
+        this.setUserInfo({})
+        this.$router.push('/login')
+      }
+    }
+  }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
@@ -76,6 +127,7 @@
 
       .tab-item
         flex: 1
+        max-width: 120px
         padding: 8px 20px 0
         text-align: center
         display: table-cell
@@ -97,10 +149,12 @@
           .tab-link
             color: $color-nav-active
 
-    .mine
+    .exit
       width: 200px
       padding-right: 40px
       color: #fff
       line-height: 80px
       text-align: right
+      font-size: $font-size-medium-x
+      cursor: pointer
 </style>
