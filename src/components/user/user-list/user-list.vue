@@ -42,6 +42,59 @@
         </Page>
       </div>
     </div>
+
+    <Modal v-model="addStatus.visible">
+      <!--添加-->
+      <Form class="reg-wrap-x" :model="formItem" ref="regFormCreate" :rules="ruleValidate">
+        <!-- <div class="tt">注册</div> -->
+        <div class="tt2"><span class="text-red">*</span>用户名：</div>
+        <div class="mg">
+          <Form-item prop="loginName">
+            <Input type="text" class="text_style" size="large" placeholder="6-18 个字符，支持字母、数字、下划线，区分大小写"
+                   v-model="formItem.loginName"/>
+          </Form-item>
+        </div>
+        <div class="tt2"><span class="text-red">*</span> 密码：</div>
+        <div class="mg">
+          <Form-item prop="password">
+            <Input type="password" class="text_style" size="large" placeholder="密码为 6-18 位"
+                   v-model="formItem.password"/>
+          </Form-item>
+        </div>
+        <div class="tt2"><span class="text-red">*</span> 确认密码：</div>
+        <div class="mg">
+          <Form-item prop="passwdCheck">
+            <Input type="password" class="text_style" size="large" placeholder="请再次输入，密码为 6-18 位"
+                   v-model="formItem.passwdCheck"/>
+          </Form-item>
+        </div>
+        <div class="tt2 ping"><span class="text-red">*</span> 角色属性：</div>
+        <div class="mg">
+          <Form-item prop="userTypeId">
+            <Select class="text_style" v-model="formItem.userTypeId">
+              <Option :value="item.id" v-for="(item,index) in userRoleList" :key="index">{{item.name}}</Option>
+            </Select>
+          </Form-item>
+        </div>
+        <div class="tt2"><span class="text-red">*</span> 联系电话：</div>
+        <div class="mg">
+          <Form-item prop="phone">
+            <Input type="text" class="text_style" size="large" placeholder="请输入联系电话" v-model="formItem.phone"/>
+          </Form-item>
+        </div>
+        <div class="tt2 ping"><span class="text-red">*</span> 电子邮箱：</div>
+        <div class="mg">
+          <Form-item prop="email">
+            <Input size="large" class="text_style" placeholder="请输入邮箱地址" v-model="formItem.email"/>
+          </Form-item>
+        </div>
+
+        <div slot="footer">
+          <Button type="primary">确定添加</Button>
+          <!-- <Button type="primary" @click="action">提交</Button> -->
+        </div>
+      </Form>
+    </Modal>
   </div>
 </template>
 
@@ -58,16 +111,74 @@
           loginName: '',
           password: '',
           passwdCheck: '',
-          telephone: '',
-          identityCode: '',
-          organisationCode: '',
-          address: '',
+          userTypeId: '',
+          phone: '',
           email: '',
-          userTypeId: '', // 新增，管理员或者普通用户id
           userTypeName: '' // 新增，管理员或者普通用户
         },
+        ruleValidate: {
+          loginName: [
+            {
+              required: true,
+              message: '用户名不能为空',
+              trigger: 'blur'
+            },
+            {
+              trigger: 'blur',
+              message: '6-18个字符，支持字母，数字，下划线',
+              pattern: /^\w{6,18}$/,
+            }
+          ],
+          userTypeId: [
+            {
+              required: true,
+              message: '角色属性不能为空',
+            }
+          ],
+          password: [
+            {
+              trigger: 'blur',
+              required: true,
+              message: '密码为 6-18 位',
+              min: 6,
+              max: 18,
+            }
+          ],
+          passwdCheck: [
+            {
+              trigger: 'blur',
+              required: true,
+              message: '密码为 6-18 位',
+              min: 6,
+              max: 18,
+            },
+            {
+              trigger: 'blur',
+              validator: this.validatePassCheck,
+            }
+          ],
+          phone: [
+            {
+              required: true,
+              message: '联系电话不能为空',
+              trigger: 'blur'
+            }
+          ],
+          email: [
+            {
+              required: true,
+              type: 'email',
+              message: '邮箱错误',
+              trigger: 'blur'
+            }
+          ],
+        },
         userList: [],
-        userRoleList: []
+        userRoleList: [],
+        addStatus: { // 新增弹出框状态
+          visible: false,
+          loading: false
+        }
       }
     },
     created() {
@@ -109,13 +220,22 @@
         this.userList = data
       },
       addItem() {
-
+        this.addStatus.visible = true
       },
       updateItem() {
       },
       checkItem() {
       },
       deleteItem() {
+      },
+      validatePassCheck(rule, value, callback) {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.formItem.password) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
       }
     },
   }
